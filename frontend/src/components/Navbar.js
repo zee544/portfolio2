@@ -110,19 +110,7 @@ const Navbar = ({ showAdmin, setShowAdmin }) => {
               </a>
             </li>
           ))}
-          <li className="mobile-menu-item" style={{ marginTop: '1.5rem' }}>
-            <button
-              onClick={() => {
-                setIsOpen(false);
-                setShowAdmin(!showAdmin);
-              }}
-              className="btn btn-primary"
-              style={{ width: '100%', padding: '0.6rem' }}
-            >
-              {showAdmin ? <Globe size={18} /> : <Lock size={16} />}
-              <span style={{ marginLeft: '8px' }}>{showAdmin ? 'View Portfolio' : 'Admin Login'}</span>
-            </button>
-          </li>
+          
         </ul>
       </div>
 

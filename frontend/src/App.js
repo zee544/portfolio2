@@ -34,7 +34,7 @@ function App() {
         )}
       </main>
 
-      {/* Shared Footer Segment */}
+    
       <Footer />
 
       <style>{`
