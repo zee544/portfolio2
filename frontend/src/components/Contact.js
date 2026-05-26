@@ -1,226 +1,86 @@
-import React, { useState } from 'react';
-import { Mail, MapPin, Send, CheckCircle, AlertCircle, Phone } from 'lucide-react';
+import React from 'react';
+import { Mail, MapPin, Phone } from 'lucide-react';
 import { personalInfo } from '../data';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-
-  const [status, setStatus] = useState({
-    loading: false,
-    success: false,
-    error: null
-  });
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    // Client side checks
-    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
-      setStatus({ loading: false, success: false, error: 'Please fill in all fields.' });
-      return;
-    }
-
-    // Email format validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      setStatus({ loading: false, success: false, error: 'Please enter a valid email address.' });
-      return;
-    }
-
-    setStatus({ loading: true, success: false, error: null });
-
-    try {
-      // Use relative path - works in both development and production
-      const apiUrl = process.env.NODE_ENV === 'production' 
-        ? '/api/contact' 
-        : 'http://localhost:5000/api/contact';
-      
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setStatus({ loading: false, success: true, error: null });
-        setFormData({ name: '', email: '', subject: '', message: '' });
-        
-        // Auto-hide success message after 5 seconds
-        setTimeout(() => {
-          setStatus(prev => ({ ...prev, success: false }));
-        }, 5000);
-      } else {
-        setStatus({ loading: false, success: false, error: data.error || 'Failed to send message.' });
-      }
-    } catch (err) {
-      console.error('Contact submission error:', err);
-      
-      // Fallback: Open email client with pre-filled message
-      const mailtoLink = `mailto:${personalInfo.email}?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
-        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-      )}`;
-      
-      setStatus({ 
-        loading: false, 
-        success: false, 
-        error: 'Unable to send via server. Click your email client to send directly.' 
-      });
-      
-      // Ask user if they want to open email client
-      if (window.confirm('Server is offline. Would you like to open your email client to send this message?')) {
-        window.location.href = mailtoLink;
-      }
-    }
-  };
-
   return (
     <section id="contact" className="contact-section">
-      <h2 className="section-title">Get In Touch</h2>
+      <div className="contact-container">
+        <h2 className="section-title">Get In Touch</h2>
 
-      <div className="grid-2 contact-grid">
-        {/* Contact Info Card */}
-        <div className="contact-info-panel">
-          <h3 className="contact-subtitle">Let's build something <span className="text-gradient-cyan-purple">amazing together!</span></h3>
-          <p className="contact-lead-text">
-            I am currently open to new opportunities, or collaborations. If you have a question or just want to say hi, feel free to drop me a message!
-          </p>
+        <div className="contact-info-centered">
+          <div className="contact-info-panel glass-card">
+            <h3 className="contact-subtitle">Let's build something <span className="text-gradient-cyan-purple">amazing together!</span></h3>
+            <p className="contact-lead-text">
+              I am currently open to new opportunities, or collaborations. If you have a question or just want to say hi, feel free to drop me a message!
+            </p>
 
-          <div className="contact-details-list">
-            <div className="glass-card contact-detail-item">
-              <Mail className="detail-icon" size={20} />
-              <div className="detail-texts">
-                <h4>Email</h4>
-                <a href={`mailto:${personalInfo.email}`}>{personalInfo.email}</a>
+            <div className="contact-details-list">
+              <div className="contact-detail-item">
+                <Mail className="detail-icon" size={20} />
+                <div className="detail-texts">
+                  <h4>Email</h4>
+                  <a href={`mailto:${personalInfo.email}`}>{personalInfo.email}</a>
+                </div>
               </div>
-            </div>
 
-            <div className="glass-card contact-detail-item">
-              <MapPin className="detail-icon" size={20} />
-              <div className="detail-texts">
-                <h4>Location</h4>
-                <span>{personalInfo.location}</span>
+              <div className="contact-detail-item">
+                <MapPin className="detail-icon" size={20} />
+                <div className="detail-texts">
+                  <h4>Location</h4>
+                  <span>{personalInfo.location}</span>
+                </div>
               </div>
-            </div>
 
-            <div className="glass-card contact-detail-item">
-              <Phone className="detail-icon" size={20} />
-              <div className="detail-texts">
-                <h4>Phone / Telegram</h4>
-                <span>+94 77 600 5507</span>
+              <div className="contact-detail-item">
+                <Phone className="detail-icon" size={20} />
+                <div className="detail-texts">
+                  <h4>Phone / Telegram</h4>
+                  <span>+94 77 600 5507</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Contact Form Card */}
-        <div className="glass-card contact-form-card">
-          <form onSubmit={handleSubmit} className="contact-form">
-            <div className="form-group">
-              <label htmlFor="name" className="form-label">Your Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Perera"
-                className="form-input"
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="email" className="form-label">Your Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="perera@example.com"
-                className="form-input"
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="subject" className="form-label">Subject</label>
-              <input
-                type="text"
-                id="subject"
-                name="subject"
-                value={formData.subject}
-                onChange={handleChange}
-                placeholder="Project Discussion"
-                className="form-input"
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="message" className="form-label">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                placeholder="Hi Thanuja, I'd like to discuss a project..."
-                className="form-input"
-                rows="5"
-                required
-              />
-            </div>
-
-            {/* Submission Status Alerts */}
-            {status.success && (
-              <div className="status-alert success">
-                <CheckCircle size={18} />
-                <span>Thank you! Your message was sent successfully.</span>
-              </div>
-            )}
-
-            {status.error && (
-              <div className="status-alert error">
-                <AlertCircle size={18} />
-                <span>{status.error}</span>
-              </div>
-            )}
-
-            <button 
-              type="submit" 
-              className="btn btn-primary btn-submit" 
-              disabled={status.loading}
-            >
-              <span>{status.loading ? 'Sending...' : 'Send Message'}</span>
-              <Send size={16} />
-            </button>
-          </form>
         </div>
       </div>
 
       <style>{`
         .contact-section {
           position: relative;
+          padding: 4rem 2rem;
+          min-height: 80vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
 
-        .contact-grid {
-          align-items: flex-start;
+        .contact-container {
+          max-width: 800px;
+          width: 100%;
+          margin: 0 auto;
+        }
+
+        .section-title {
+          text-align: center;
+          font-size: 2.5rem;
+          font-weight: 800;
+          margin-bottom: 3rem;
+          background: linear-gradient(135deg, #fff, var(--accent-cyan));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .contact-info-centered {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .contact-info-panel {
+          padding: 2.5rem;
+          max-width: 600px;
+          width: 100%;
+          text-align: center;
         }
 
         .contact-subtitle {
@@ -234,19 +94,31 @@ const Contact = () => {
           color: var(--text-secondary);
           margin-bottom: 2rem;
           font-size: 1.05rem;
+          line-height: 1.6;
         }
 
         .contact-details-list {
           display: flex;
           flex-direction: column;
           gap: 1rem;
+          align-items: center;
         }
 
         .contact-detail-item {
           display: flex;
           align-items: center;
           gap: 1.2rem;
-          padding: 1.2rem;
+          padding: 1rem 1.5rem;
+          background: rgba(255, 255, 255, 0.03);
+          border-radius: 12px;
+          transition: all 0.3s ease;
+          width: 100%;
+          max-width: 400px;
+        }
+
+        .contact-detail-item:hover {
+          background: rgba(255, 255, 255, 0.05);
+          transform: translateX(5px);
         }
 
         .detail-icon {
@@ -261,15 +133,20 @@ const Contact = () => {
           flex-shrink: 0;
         }
 
+        .detail-texts {
+          text-align: left;
+        }
+
         .detail-texts h4 {
-          font-size: 0.9rem;
+          font-size: 0.85rem;
           font-weight: 500;
           color: var(--text-muted);
-          margin-bottom: 0.1rem;
+          margin-bottom: 0.2rem;
+          letter-spacing: 0.5px;
         }
 
         .detail-texts span, .detail-texts a {
-          font-size: 1.05rem;
+          font-size: 1rem;
           font-weight: 600;
           color: var(--text-primary);
         }
@@ -278,52 +155,49 @@ const Contact = () => {
           color: var(--accent-cyan);
         }
 
-        /* Contact Form */
-        .contact-form-card {
-          padding: 2.2rem;
-        }
-
-        .contact-form {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .btn-submit {
-          width: 100%;
-          margin-top: 1rem;
-        }
-
-        .status-alert {
-          display: flex;
-          align-items: center;
-          gap: 0.8rem;
-          padding: 0.8rem 1rem;
-          border-radius: 8px;
-          margin-bottom: 1.5rem;
-          font-size: 0.95rem;
-          font-weight: 500;
-        }
-
-        .status-alert.success {
-          background: rgba(16, 185, 129, 0.1);
-          border: 1px solid rgba(16, 185, 129, 0.2);
-          color: #10b981;
-        }
-
-        .status-alert.error {
-          background: rgba(239, 68, 68, 0.1);
-          border: 1px solid rgba(239, 68, 68, 0.2);
-          color: #f87171;
-        }
-
-        textarea {
-          resize: vertical;
-          min-height: 100px;
-        }
-
         @media (max-width: 768px) {
-          .contact-form-card {
+          .contact-section {
+            padding: 2rem 1.5rem;
+          }
+          
+          .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+          }
+          
+          .contact-subtitle {
+            font-size: 1.5rem;
+          }
+          
+          .contact-info-panel {
             padding: 1.5rem;
+          }
+          
+          .contact-detail-item {
+            padding: 0.8rem 1rem;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .contact-subtitle {
+            font-size: 1.3rem;
+          }
+          
+          .contact-lead-text {
+            font-size: 0.95rem;
+          }
+          
+          .detail-icon {
+            width: 36px;
+            height: 36px;
+          }
+          
+          .detail-texts h4 {
+            font-size: 0.75rem;
+          }
+          
+          .detail-texts span, .detail-texts a {
+            font-size: 0.9rem;
           }
         }
       `}</style>
