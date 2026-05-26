@@ -185,6 +185,7 @@ const Hero = () => {
           color: var(--text-secondary);
           background: rgba(255, 255, 255, 0.03);
           border: 1px solid var(--border-glass);
+          border-color: var(--accent-cyan);
           width: 44px;
           height: 44px;
           border-radius: 50%;

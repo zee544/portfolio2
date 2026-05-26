@@ -9,9 +9,7 @@ const About = () => {
 
       <div className="grid-2 about-grid">
         <div className="about-text-content">
-          <h3 className="about-subtitle">
-            Crafting elegant code to build <span className="text-gradient-cyan-purple">scalable digital systems</span>
-          </h3>
+          
           <p className="about-paragraph">
             Hi! I'm Thanuja, an undergraduate student passionate about creating things that live on the internet — from websites and web applications to creative digital solutions.
 

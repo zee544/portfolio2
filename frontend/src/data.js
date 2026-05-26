@@ -92,7 +92,7 @@ export const projects = [
     image: url
   },
   {
-    id: 3,
+    id: 4,
     title: "FixItNow - Maintenance Request Web Application ",
     description: "Built a maintenance request management system for submitting, assigning, and tracking service tasks, enabling efficient workflow management and real-time progress monitoring.",
     tech: ["React", "Node.js", "Express", "MongoDB"],
@@ -102,17 +102,17 @@ export const projects = [
     image: fixitnow
   },
   {
-    id: 3,
+    id: 5,
     title: "DailyPulse - Habit Tracker Mobile Application ",
     description: "Designed and developed a wellness tracking mobile app with habit tracking, mood journaling, and hydration reminders, including widgets and notifications to improve daily engagement.",
     tech: ["Android Studio"],
-    category: "Mobile App",
+    category: "Mobile App Development & Design",
     githubLink: "https://github.com/zee544/HabitTracker.git",
     liveLink: "#",
     image: dailypulse
   },
   {
-  id: 3,
+  id: 6,
   title: "PetPal - Pet Care Management UI/UX Design",
   description: "Designed a pet care and wellness mobile app prototype in Figma with features for vaccine tracking, reminders, grooming schedules, and pet growth monitoring.",
   tech: ["Figma"],
@@ -122,7 +122,7 @@ export const projects = [
   image: petpal
 },
   {
-  id: 3,
+  id: 7,
   title: "Tours - Tourism Guide Web Application",
   description: "Developed a tourism guide web application to manage tour information and travel services using PHP, MySQL, XAMPP, and Java.",
   tech: ["PHP", "XAMPP", "MySQL", "Java"],
@@ -136,23 +136,23 @@ export const projects = [
 ];
 
 export const experienceTimeline = [
-  
+  {
+    id: 4,
+    type: "education",
+    title: "Part-Time Training Programme (Certificate Course - Electronics)",
+    organization: "Ceylon Germen Technical Training Institute",
+    duration: "2024 - 2025",
+    description: "Successfully completed with Good Pass result."
+  },
   {
     id: 3,
     type: "education",
     title: "BSc (Hons) in Information Technology Specializing in Software Engineering (Undergraduate)",
     organization: "Sri Lanka Institute of Information Technology",
-    duration: "2023 - 2027(expected)",
+    duration: "2023 - Present",
     
   },
-  {
-    id: 4,
-    type: "education",
-    title: "Part-Time Training Programme(Certificate Course - Electronics)",
-    organization: "Ceylon Germen Technical Training Institute",
-    duration: "2024 - 2025",
-    description: "Successfully completed with Good Pass result."
-  },
+  
   
   {
     id: 5,
