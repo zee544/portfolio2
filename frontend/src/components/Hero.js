@@ -62,8 +62,7 @@ const Hero = () => {
           <h2 className="hero-title">
             I am a <span className="typing-text text-gradient-cyan-purple">{displayText}</span>
             <span className="typing-cursor">|</span>
-            <br />
-            <br />
+          
           </h2>
           
           <p className="hero-description">{personalInfo.bio}</p>
