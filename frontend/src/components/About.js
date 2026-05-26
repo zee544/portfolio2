@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, MapPin, Award, Code, Globe, User } from 'lucide-react';
+import {  MapPin, Award, Code, Globe, User } from 'lucide-react';
 import { personalInfo } from '../data';
 
 const About = () => {

@@ -41,7 +41,7 @@ const Hero = () => {
     }
 
     return () => clearTimeout(timer);
-  }, [displayText, isDeleting, titleIndex]);
+  }, [displayText, isDeleting, titleIndex, titles]);
 
   const handleScrollTo = (id) => {
     const element = document.getElementById(id);

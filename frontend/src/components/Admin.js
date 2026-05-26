@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Lock, LogOut, Mail, User, Calendar, RefreshCw, Database } from 'lucide-react';
 
 const Admin = () => {
@@ -11,29 +11,12 @@ const Admin = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    if (token) {
-      setIsLoggedIn(true);
-      fetchMessages();
-      fetchStatus();
-    }
-  }, [token]);
-
-  const fetchStatus = async () => {
-    try {
-      const res = await fetch('http://localhost:5000/api/status');
-      const data = await res.json();
-      setDbStatus(data.database || 'Local JSON File');
-    } catch (err) {
-      setDbStatus('Offline');
-    }
-  };
-
-  const fetchMessages = async () => {
+  // Fetch messages function wrapped in useCallback
+  const fetchMessages = useCallback(async () => {
     setLoading(true);
     setError('');
     try {
-      const res = await fetch('http://localhost:5000/api/contact/messages', {
+      const res = await fetch('/api/contact/messages', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -53,7 +36,34 @@ const Admin = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [token]);
+
+  const handleLogout = useCallback(() => {
+    localStorage.removeItem('adminToken');
+    setToken('');
+    setIsLoggedIn(false);
+    setMessages([]);
+    setUsername('');
+    setPassword('');
+  }, []);
+
+  const fetchStatus = useCallback(async () => {
+    try {
+      const res = await fetch('/api/status');
+      const data = await res.json();
+      setDbStatus(data.database || 'Local JSON File');
+    } catch (err) {
+      setDbStatus('Offline');
+    }
+  }, []);
+
+  useEffect(() => {
+    if (token) {
+      setIsLoggedIn(true);
+      fetchMessages();
+      fetchStatus();
+    }
+  }, [token, fetchMessages, fetchStatus]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -61,7 +71,7 @@ const Admin = () => {
     setLoading(true);
 
     try {
-      const res = await fetch('http://localhost:5000/api/auth/login', {
+      const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -83,15 +93,6 @@ const Admin = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem('adminToken');
-    setToken('');
-    setIsLoggedIn(false);
-    setMessages([]);
-    setUsername('');
-    setPassword('');
   };
 
   if (!isLoggedIn) {

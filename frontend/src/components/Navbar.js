@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Lock, Globe } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { personalInfo } from '../data';
 
 const Navbar = ({ showAdmin, setShowAdmin }) => {

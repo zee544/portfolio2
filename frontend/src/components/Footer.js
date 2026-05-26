@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Heart } from 'lucide-react';
+import { Github, Linkedin, Mail } from 'lucide-react';
 import { GitHubIcon, LinkedInIcon } from './SocialIcons';
 import { personalInfo } from '../data';
 
