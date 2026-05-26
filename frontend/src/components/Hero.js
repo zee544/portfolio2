@@ -227,8 +227,8 @@ const Hero = () => {
 
         .hero-profile-image {
         position: absolute;
-          top: -100px;
-          left: 80px;
+          top: -80px;
+          left: 50px;
           width: 100%;
           height: 100%;
           object-fit: cover;
