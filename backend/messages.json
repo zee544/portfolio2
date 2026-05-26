@@ -1,0 +1,10 @@
+[
+  {
+    "name": "Browser Tester",
+    "email": "tester@gmail.com",
+    "subject": "Hello Thanuja",
+    "message": "This is an automated test verifying the contact form integration with the backend API.",
+    "createdAt": "2026-05-25T18:42:15.081Z",
+    "id": "_m76ef5tli"
+  }
+]
