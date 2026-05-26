@@ -32,11 +32,22 @@ const Contact = () => {
       return;
     }
 
+    // Email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setStatus({ loading: false, success: false, error: 'Please enter a valid email address.' });
+      return;
+    }
+
     setStatus({ loading: true, success: false, error: null });
 
     try {
-      // Connect to our express backend api (running on port 5000)
-      const response = await fetch('http://localhost:5000/api/contact', {
+      // Use relative path - works in both development and production
+      const apiUrl = process.env.NODE_ENV === 'production' 
+        ? '/api/contact' 
+        : 'http://localhost:5000/api/contact';
+      
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -48,18 +59,33 @@ const Contact = () => {
 
       if (response.ok) {
         setStatus({ loading: false, success: true, error: null });
-        setFormData({ name: '', email: '', subject: '', message: '' }); // reset form
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        
+        // Auto-hide success message after 5 seconds
+        setTimeout(() => {
+          setStatus(prev => ({ ...prev, success: false }));
+        }, 5000);
       } else {
         setStatus({ loading: false, success: false, error: data.error || 'Failed to send message.' });
       }
     } catch (err) {
       console.error('Contact submission error:', err);
-      // Fallback message for development
+      
+      // Fallback: Open email client with pre-filled message
+      const mailtoLink = `mailto:${personalInfo.email}?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      )}`;
+      
       setStatus({ 
         loading: false, 
         success: false, 
-        error: 'Backend offline. But you can reach me directly via email!' 
+        error: 'Unable to send via server. Click your email client to send directly.' 
       });
+      
+      // Ask user if they want to open email client
+      if (window.confirm('Server is offline. Would you like to open your email client to send this message?')) {
+        window.location.href = mailtoLink;
+      }
     }
   };
 
@@ -156,6 +182,7 @@ const Contact = () => {
                 onChange={handleChange}
                 placeholder="Hi Thanuja, I'd like to discuss a project..."
                 className="form-input"
+                rows="5"
                 required
               />
             </div>
@@ -280,13 +307,18 @@ const Contact = () => {
         .status-alert.success {
           background: rgba(16, 185, 129, 0.1);
           border: 1px solid rgba(16, 185, 129, 0.2);
-          color: var(--accent-green);
+          color: #10b981;
         }
 
         .status-alert.error {
           background: rgba(239, 68, 68, 0.1);
           border: 1px solid rgba(239, 68, 68, 0.2);
           color: #f87171;
+        }
+
+        textarea {
+          resize: vertical;
+          min-height: 100px;
         }
 
         @media (max-width: 768px) {
