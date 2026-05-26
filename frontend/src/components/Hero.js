@@ -62,7 +62,10 @@ const Hero = () => {
           <h2 className="hero-title">
             I am a <span className="typing-text text-gradient-cyan-purple">{displayText}</span>
             <span className="typing-cursor">|</span>
+            <br />
+            <br />
           </h2>
+          
           <p className="hero-description">{personalInfo.bio}</p>
 
           <div className="hero-actions">
@@ -92,7 +95,7 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Image Container with Big Size */}
+        {/* Image Container */}
         <div className="hero-image-container">
           <div className="hero-image-wrapper">
             <img 
@@ -150,7 +153,7 @@ const Hero = () => {
           font-weight: 600;
           color: var(--text-primary);
           margin-bottom: 1.5rem;
-          height: 40px;
+          min-height: 80px;
         }
 
         .typing-text {
@@ -203,7 +206,7 @@ const Hero = () => {
           background: rgba(6, 182, 212, 0.05);
         }
 
-        /* Image Container Styles - Big Size */
+        /* Image Container Styles - Preserved Position */
         .hero-image-container {
           display: flex;
           justify-content: center;
@@ -226,7 +229,7 @@ const Hero = () => {
         }
 
         .hero-profile-image {
-        position: absolute;
+          position: absolute;
           top: -80px;
           left: 50px;
           width: 100%;
@@ -249,12 +252,9 @@ const Hero = () => {
           left: 0;
           right: 0;
           bottom: 0;
-          
           pointer-events: none;
           transition: all 0.3s ease;
         }
-
-       
 
         .code-keyword { color: #f43f5e; }
         .code-string { color: var(--accent-cyan); }
@@ -264,13 +264,19 @@ const Hero = () => {
           50% { opacity: 0; }
         }
 
+        /* Desktop Large */
         @media (max-width: 1200px) {
           .hero-image-wrapper {
             width: 450px;
             height: 450px;
           }
+          .hero-profile-image {
+            top: -60px;
+            left: 40px;
+          }
         }
 
+        /* Tablet */
         @media (max-width: 968px) {
           .hero-section {
             padding-top: 100px;
@@ -283,16 +289,91 @@ const Hero = () => {
           .hero-name {
             font-size: 3rem;
           }
+          .hero-title {
+            font-size: 1.5rem;
+            min-height: 70px;
+          }
+          .hero-image-container {
+            order: -1;
+          }
           .hero-image-wrapper {
             width: 400px;
             height: 400px;
+            margin: 0 auto;
+          }
+          .hero-profile-image {
+            top: -60px;
+            left: 35px;
           }
         }
 
+        /* Mobile Large */
+        @media (max-width: 576px) {
+          .hero-section {
+            padding-top: 80px;
+          }
+          .hero-name {
+            font-size: 2.2rem;
+          }
+          .hero-title {
+            font-size: 1.2rem;
+            min-height: 60px;
+          }
+          .hero-description {
+            font-size: 0.95rem;
+          }
+          .hero-actions {
+            flex-direction: column;
+            gap: 1rem;
+          }
+          .hero-actions button {
+            width: 100%;
+            justify-content: center;
+          }
+          .hero-socials {
+            justify-content: center;
+          }
+          .hero-greeting {
+            font-size: 0.9rem;
+          }
+          .hero-image-wrapper {
+            width: 320px;
+            height: 320px;
+          }
+          .hero-profile-image {
+            top: -45px;
+            left: 28px;
+          }
+        }
+
+        /* Mobile Small */
         @media (max-width: 480px) {
           .hero-image-wrapper {
-            width: 300px;
-            height: 300px;
+            width: 280px;
+            height: 280px;
+          }
+          .hero-profile-image {
+            top: -40px;
+            left: 25px;
+          }
+          .hero-name {
+            font-size: 1.8rem;
+          }
+          .hero-title {
+            font-size: 1rem;
+            min-height: 50px;
+          }
+        }
+
+        /* Extra Small */
+        @media (max-width: 380px) {
+          .hero-image-wrapper {
+            width: 250px;
+            height: 250px;
+          }
+          .hero-profile-image {
+            top: -35px;
+            left: 22px;
           }
         }
       `}</style>
