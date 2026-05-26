@@ -13,30 +13,30 @@ const Admin = () => {
 
   // Fetch messages function wrapped in useCallback
   const fetchMessages = useCallback(async () => {
-    setLoading(true);
-    setError('');
-    try {
-      const res = await fetch('/api/contact/messages', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-      const data = await res.json();
-
-      if (res.ok) {
-        setMessages(data.data);
-      } else {
-        setError(data.error || 'Failed to fetch messages.');
-        if (res.status === 401) {
-          handleLogout();
-        }
+  setLoading(true);
+  setError('');
+  try {
+    const res = await fetch('/api/contact/messages', {
+      headers: {
+        'Authorization': `Bearer ${token}`
       }
-    } catch (err) {
-      setError('Failed to load messages from backend API.');
-    } finally {
-      setLoading(false);
+    });
+    const data = await res.json();
+
+    if (res.ok) {
+      setMessages(data.data);
+    } else {
+      setError(data.error || 'Failed to fetch messages.');
+      if (res.status === 401) {
+        handleLogout();
+      }
     }
-  }, [token]);
+  } catch (err) {
+    setError('Failed to load messages from backend API.');
+  } finally {
+    setLoading(false);
+  }
+}, [token, handleLogout]); // ← Add handleLogout here
 
   const handleLogout = useCallback(() => {
     localStorage.removeItem('adminToken');

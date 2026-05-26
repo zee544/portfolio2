@@ -8,12 +8,12 @@ const Hero = () => {
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   
-  const titles = [
+  const titles = React.useMemo(() => [
     "Full Stack Developer",
     "MERN Stack Developer",
     "",
     "Creative Problem Solver"
-  ];
+  ], []);
 
   const TYPING_SPEED = 100;
   const DELETING_SPEED = 50;
@@ -229,7 +229,6 @@ const Hero = () => {
         position: absolute;
           top: -100px;
           left: 80px;
-        
           width: 100%;
           height: 100%;
           object-fit: cover;
