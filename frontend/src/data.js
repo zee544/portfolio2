@@ -15,7 +15,7 @@ export const personalInfo = {
   github: "https://github.com/zee544",
   linkedin: "https://www.linkedin.com/in/thanuja-sewmini-005901374/",
   imageUrl: me,
-  resumeUrl: "#",
+  resumeUrl: "/cv.pdf",
   bio: "Ambitious Software Engineering undergraduate at Sri Lanka Institute of Information Technology with experience in full-stack web development, Android application development, UI/UX design, and microservices architecture. Skilled in MERN stack technologies, Docker, Kubernetes, and modern development tools, with a passion for building practical and user-friendly software solutions. "
 };
 
