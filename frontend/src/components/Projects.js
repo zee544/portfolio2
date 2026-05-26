@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { projects } from '../data';
 import { ExternalLink, Search } from 'lucide-react';
-import { GitHubIcon } from './SocialIcons';
+import { GitHubIcon, LinkedInIcon } from './SocialIcons';
 
 const Projects = () => {
   const [filter, setFilter] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const categories = ['All', 'Full Stack', 'Frontend'];
+  const categories = ['All', 'Full Stack', 'Frontend', 'Mobile App Design'];
 
   // Filter projects by category and search query
   const filteredProjects = projects.filter((project) => {
@@ -19,8 +19,6 @@ const Projects = () => {
     
     return matchesCategory && matchesSearch;
   });
-
-
 
   return (
     <section id="projects" className="projects-section">
@@ -58,11 +56,10 @@ const Projects = () => {
           <div key={project.id} className="glass-card project-card glow-cyan-hover">
             
             {/* Project Image Header */}
-            <div className="project-image-container" >
+            <div className="project-image-container">
               <img 
-               src={project.image} 
-  alt={project.title}
-                
+                src={project.image} 
+                alt={project.title}
                 className="project-image"
               />
               <div className="project-image-overlay">
@@ -84,17 +81,31 @@ const Projects = () => {
 
               {/* Project Links */}
               <div className="project-card-links">
-                <a 
-                  href={project.githubLink} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="project-link"
-                  title="Source Code"
-                >
-                  <GitHubIcon size={18} />
-                  <span>Code</span>
-                </a>
-                {project.liveLink !== '#' && (
+                {project.githubLink && project.githubLink !== '#' && (
+                  <a 
+                    href={project.githubLink} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="project-link"
+                    title="Source Code"
+                  >
+                    <GitHubIcon size={18} />
+                    <span>Code</span>
+                  </a>
+                )}
+                {project.linkedinLink && project.linkedinLink !== '#' && (
+                  <a 
+                    href={project.linkedinLink} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="project-link"
+                    title="View on LinkedIn"
+                  >
+                    <LinkedInIcon size={18} />
+                
+                  </a>
+                )}
+                {project.liveLink && project.liveLink !== '#' && (
                   <a 
                     href={project.liveLink} 
                     target="_blank" 
@@ -139,6 +150,7 @@ const Projects = () => {
           border: 1px solid var(--border-glass);
           padding: 0.3rem;
           border-radius: 50px;
+          flex-wrap: wrap;
         }
 
         .filter-tab {
@@ -291,6 +303,7 @@ const Projects = () => {
           gap: 1rem;
           border-top: 1px solid var(--border-glass);
           padding-top: 1rem;
+          flex-wrap: wrap;
         }
 
         .project-link {
@@ -300,10 +313,12 @@ const Projects = () => {
           font-size: 0.9rem;
           font-weight: 600;
           color: var(--text-secondary);
+          transition: var(--transition-smooth);
         }
 
         .project-link:hover {
           color: var(--accent-cyan);
+          transform: translateY(-2px);
         }
 
         .project-link.live:hover {
@@ -324,6 +339,12 @@ const Projects = () => {
           }
           .search-box {
             width: 100%;
+          }
+          .filter-tabs {
+            justify-content: center;
+          }
+          .no-projects-found {
+            grid-column: span 1;
           }
         }
       `}</style>

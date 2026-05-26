@@ -6,6 +6,8 @@ const db = require('../config/db');
 exports.submitMessage = async (req, res) => {
   const { name, email, subject, message } = req.body;
 
+  console.log('Received message:', { name, email, subject, message }); // Debug log
+
   // Simple validation
   if (!name || !email || !subject || !message) {
     return res.status(400).json({ error: 'Please enter all required fields.' });

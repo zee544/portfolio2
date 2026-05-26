@@ -3,8 +3,9 @@ import swapnest from "./assets/swapnest.png";
 import url from "./assets/url.png";
 import fixitnow from "./assets/fixitnow.png";
 import dailypulse from "./assets/dailypulse.png";
-
-
+import me from "./assets/me.png";
+import tours from "./assets/tours.webp";
+import petpal from "./assets/petpal.png";
 
 export const personalInfo = {
   name: "Thanuja Sewmini",
@@ -13,9 +14,9 @@ export const personalInfo = {
   location: "Panadura, Sri Lanka",
   github: "https://github.com/zee544",
   linkedin: "https://www.linkedin.com/in/thanuja-sewmini-005901374/",
-
+  imageUrl: me,
   resumeUrl: "#",
-  bio: "A highly motivated and passionate Full Stack Developer specializing in modern MERN (MongoDB, Express, React, Node.js) web applications. I love building high-performance, responsive, and secure web solutions that solve real-world problems. With experience in both frontend styling and microservices orchestration (Docker & Kubernetes), I focus on delivering seamless, scalable, and premium end-to-end user experiences."
+  bio: "Ambitious Software Engineering undergraduate at Sri Lanka Institute of Information Technology with experience in full-stack web development, Android application development, UI/UX design, and microservices architecture. Skilled in MERN stack technologies, Docker, Kubernetes, and modern development tools, with a passion for building practical and user-friendly software solutions. "
 };
 
 export const skillCategories = [
@@ -110,6 +111,27 @@ export const projects = [
     liveLink: "#",
     image: dailypulse
   },
+  {
+  id: 3,
+  title: "PetPal - Pet Care Management UI/UX Design",
+  description: "Designed a pet care and wellness mobile app prototype in Figma with features for vaccine tracking, reminders, grooming schedules, and pet growth monitoring.",
+  tech: ["Figma"],
+  category: "Mobile App Design",
+  linkedinLink: "https://www.linkedin.com/posts/thanuja-sewmini-005901374_figma-madproject-appdesign-activity-7422362099839889408--IRI?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFyussUB8bGeFVJrNG5EX_fBakdwgTQpz7c",
+  liveLink: "#",
+  image: petpal
+},
+  {
+  id: 3,
+  title: "Tours - Tourism Guide Web Application",
+  description: "Developed a tourism guide web application to manage tour information and travel services using PHP, MySQL, XAMPP, and Java.",
+  tech: ["PHP", "XAMPP", "MySQL", "Java"],
+  category: "Web Application",
+  liveLink: "#",
+  image: tours,
+  
+},
+
  
 ];
 
@@ -139,5 +161,6 @@ export const experienceTimeline = [
     organization: "Bandaragama Central College",
     duration: "2020 - 2022",
     description: "Successfully completed High School with grades in Physics, Combined Mathematics, and Chemistry."
-  }
+  },
+  
 ];

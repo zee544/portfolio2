@@ -11,7 +11,7 @@ const Hero = () => {
   const titles = [
     "Full Stack Developer",
     "MERN Stack Developer",
-    "Microservices & DevOps Enthusiast",
+    "",
     "Creative Problem Solver"
   ];
 
@@ -92,35 +92,15 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Coder Terminal Simulation */}
-        <div className="hero-terminal glass-card">
-          <div className="terminal-header">
-            <div className="terminal-dots">
-              <span className="terminal-dot red"></span>
-              <span className="terminal-dot yellow"></span>
-              <span className="terminal-dot green"></span>
-            </div>
-            <div className="terminal-tab">developer.json</div>
-          </div>
-          <div className="terminal-body">
-            <pre>
-              <code>
-                <span className="code-keyword">const</span> developer = &#123;<br />
-                &nbsp;&nbsp;name: <span className="code-string">"{personalInfo.name}"</span>,<br />
-                &nbsp;&nbsp;role: <span className="code-string">"Full Stack Software Engineer"</span>,<br />
-                &nbsp;&nbsp;location: <span className="code-string">"{personalInfo.location}"</span>,<br />
-                &nbsp;&nbsp;techStack: [<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-string">"React / Redux"</span>,<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-string">"Node.js / Express"</span>,<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-string">"MongoDB / PostgreSQL"</span>,<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-string">"Docker / Kubernetes"</span><br />
-                &nbsp;&nbsp;],<br />
-                &nbsp;&nbsp;passionateAbout: <span className="code-string">"Scale, clean code & UI aesthetics"</span>,<br />
-                &nbsp;&nbsp;currentlyLearning: <span className="code-string">"Cloud Native Architectures"</span>,<br />
-                &nbsp;&nbsp;hireable: <span className="code-boolean">true</span><br />
-                &#125;;
-              </code>
-            </pre>
+        {/* Image Container with Big Size */}
+        <div className="hero-image-container">
+          <div className="hero-image-wrapper">
+            <img 
+              src={personalInfo.imageUrl || "/api/placeholder/600/600"} 
+              alt={personalInfo.name}
+              className="hero-profile-image"
+            />
+            <div className="image-fade-overlay"></div>
           </div>
         </div>
       </div>
@@ -135,6 +115,10 @@ const Hero = () => {
 
         .hero-grid {
           width: 100%;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 4rem;
+          align-items: center;
         }
 
         .hero-content {
@@ -166,7 +150,7 @@ const Hero = () => {
           font-weight: 600;
           color: var(--text-primary);
           margin-bottom: 1.5rem;
-          height: 40px; /* Prevent layout shifting */
+          height: 40px;
         }
 
         .typing-text {
@@ -218,57 +202,59 @@ const Hero = () => {
           background: rgba(6, 182, 212, 0.05);
         }
 
-        /* Terminal Window */
-        .hero-terminal {
-          position: relative;
-          width: 100%;
-          max-width: 500px;
-          justify-self: end;
-          overflow: hidden;
-          font-family: 'Courier New', Courier, monospace;
-          box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-        }
-
-        .terminal-header {
-          background: rgba(255, 255, 255, 0.03);
-          padding: 0.8rem 1rem;
-          border-bottom: 1px solid var(--border-glass);
+        /* Image Container Styles - Big Size */
+        .hero-image-container {
           display: flex;
+          justify-content: center;
           align-items: center;
+          z-index: 1;
+        }
+
+        .hero-image-wrapper {
           position: relative;
+          width: 550px;
+          height: 550px;
+          border-radius: 20px;
+          overflow: hidden;
+          transition: transform 0.3s ease;
+          background: transparent;
         }
 
-        .terminal-dots {
-          display: flex;
-          gap: 6px;
+        .hero-image-wrapper:hover {
+          transform: translateY(-5px);
         }
 
-        .terminal-dot {
-          width: 12px;
-          height: 12px;
-          border-radius: 50%;
+        .hero-profile-image {
+        position: absolute;
+          top: -100px;
+          left: 80px;
+        
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: all 0.5s ease;
+          opacity: 1;
+          filter: brightness(1) contrast(1.2);
         }
 
-        .terminal-dot.red { background: #ff5f56; }
-        .terminal-dot.yellow { background: #ffbd2e; }
-        .terminal-dot.green { background: #27c93f; }
+        .hero-image-wrapper:hover .hero-profile-image {
+          transform: scale(1.05);
+          opacity: 1;
+          filter: brightness(1) contrast(1.2);
+        }
 
-        .terminal-tab {
+        .image-fade-overlay {
           position: absolute;
-          left: 50%;
-          transform: translateX(-50%);
-          font-size: 0.8rem;
-          color: var(--text-muted);
-          font-weight: 500;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          
+          pointer-events: none;
+          transition: all 0.3s ease;
         }
 
-        .terminal-body {
-          padding: 1.5rem;
-          font-size: 0.95rem;
-          line-height: 1.7;
-          color: #e2e8f0;
-          overflow-x: auto;
-        }
+       
 
         .code-keyword { color: #f43f5e; }
         .code-string { color: var(--accent-cyan); }
@@ -278,6 +264,13 @@ const Hero = () => {
           50% { opacity: 0; }
         }
 
+        @media (max-width: 1200px) {
+          .hero-image-wrapper {
+            width: 450px;
+            height: 450px;
+          }
+        }
+
         @media (max-width: 968px) {
           .hero-section {
             padding-top: 100px;
@@ -285,13 +278,21 @@ const Hero = () => {
           }
           .hero-grid {
             grid-template-columns: 1fr;
-          }
-          .hero-terminal {
-            justify-self: center;
-            margin-top: 2rem;
+            gap: 2rem;
           }
           .hero-name {
             font-size: 3rem;
+          }
+          .hero-image-wrapper {
+            width: 400px;
+            height: 400px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .hero-image-wrapper {
+            width: 300px;
+            height: 300px;
           }
         }
       `}</style>
