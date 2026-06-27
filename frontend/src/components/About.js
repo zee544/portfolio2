@@ -36,7 +36,7 @@ As an aspiring software engineer, I have worked on projects involving full-stack
           </div>
         </div>
 
-        {/* Highlight Cards Grid */}
+    
         <div className="about-highlights-grid">
           <div className="glass-card highlight-card glow-cyan-hover">
             <Award className="highlight-icon cyan" size={32} />

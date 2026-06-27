@@ -3,7 +3,7 @@ import { skillCategories } from '../data';
 import { Cpu, Server, Database, Settings } from 'lucide-react';
 
 const Skills = () => {
-  // Map category title to appropriate icon
+  
   const getCategoryIcon = (title) => {
     switch (title) {
       case 'Frontend Development':

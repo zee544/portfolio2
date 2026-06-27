@@ -1,6 +1,5 @@
 import React from 'react';
 
-// Custom inline SVG for GitHub
 export const GitHubIcon = ({ size = 20, className = "" }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -18,8 +17,6 @@ export const GitHubIcon = ({ size = 20, className = "" }) => (
     <path d="M9 18c-4.51 2-5-2-7-2" />
   </svg>
 );
-
-// Custom inline SVG for LinkedIn
 export const LinkedInIcon = ({ size = 20, className = "" }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -39,7 +36,6 @@ export const LinkedInIcon = ({ size = 20, className = "" }) => (
   </svg>
 );
 
-// Custom inline SVG for Twitter (X)
 export const TwitterIcon = ({ size = 20, className = "" }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"

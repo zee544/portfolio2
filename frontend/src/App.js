@@ -8,26 +8,28 @@ import Experience from './components/Experience';
 import Contact from './components/Contact';
 import Admin from './components/Admin';
 import Footer from './components/Footer';
+import Certifications from './components/Certifications';
 
 function App() {
   const [showAdmin, setShowAdmin] = useState(false);
 
   return (
     <div className="App">
-      {/* Shared Sticky Header Navbar */}
+     
       <Navbar showAdmin={showAdmin} setShowAdmin={setShowAdmin} />
       
       <main className="main-content">
         {showAdmin ? (
-          // Admin Dashboard View
+     
           <Admin />
         ) : (
-          // Main Interactive Portfolio View
+        
           <>
             <Hero />
             <About />
             <Skills />
             <Projects />
+            <Certifications />
             <Experience />
             <Contact />
           </>

@@ -15,10 +15,9 @@ const Navbar = ({ showAdmin, setShowAdmin }) => {
         setScrolled(false);
       }
 
-      // Track current section
       if (showAdmin) return;
       
-      const sections = ['home', 'about', 'skills', 'projects', 'experience', 'contact'];
+      const sections = ['home', 'about', 'skills', 'projects', 'certifications', 'experience', 'contact'];
       const scrollPosition = window.scrollY + 120;
 
       for (const section of sections) {
@@ -43,6 +42,7 @@ const Navbar = ({ showAdmin, setShowAdmin }) => {
     { id: 'about', label: 'About' },
     { id: 'skills', label: 'Skills' },
     { id: 'projects', label: 'Projects' },
+     { id: 'certifications', label: 'Certifications' },
     { id: 'experience', label: 'Experience' },
     { id: 'contact', label: 'Contact' }
   ];
@@ -51,7 +51,7 @@ const Navbar = ({ showAdmin, setShowAdmin }) => {
     setIsOpen(false);
     setShowAdmin(false);
     
-    // Allow React state to update first, then scroll
+   
     setTimeout(() => {
       const element = document.getElementById(id);
       if (element) {
@@ -68,7 +68,7 @@ const Navbar = ({ showAdmin, setShowAdmin }) => {
           <span className="logo-dot">.</span>
         </a>
 
-        {/* Desktop Menu */}
+    
         <ul className="nav-menu">
           {navLinks.map((link) => (
             <li key={link.id} className="nav-item">
@@ -87,13 +87,13 @@ const Navbar = ({ showAdmin, setShowAdmin }) => {
          
         </ul>
 
-        {/* Mobile Menu Icon */}
+    
         <div className="mobile-toggle" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
+     
       <div className={`mobile-menu-overlay ${isOpen ? 'show' : ''}`}>
         <ul className="mobile-menu-list">
           {navLinks.map((link) => (

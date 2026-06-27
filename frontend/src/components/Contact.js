@@ -10,7 +10,7 @@ const Contact = () => {
 
         <div className="contact-info-centered">
           <div className="contact-info-panel glass-card">
-            <h3 className="contact-subtitle">Let's build something <span className="text-gradient-cyan-purple">amazing together!</span></h3>
+            <h3 className="contact-subtitle">Let's build something amazing together!</h3>
             <p className="contact-lead-text">
               I am currently open to new opportunities, or collaborations. If you have a question or just want to say hi, feel free to drop me a message!
             </p>
@@ -35,7 +35,7 @@ const Contact = () => {
               <div className="contact-detail-item">
                 <Phone className="detail-icon" size={20} />
                 <div className="detail-texts">
-                  <h4>Phone / Telegram</h4>
+                  <h4>Phone </h4>
                   <span>+94 77 600 5507</span>
                 </div>
               </div>

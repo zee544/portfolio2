@@ -6,6 +6,9 @@ import dailypulse from "./assets/dailypulse.png";
 import me from "./assets/me.png";
 import tours from "./assets/tours.webp";
 import petpal from "./assets/petpal.png";
+import germentech from "./assets/german.jpg";
+import news from "./assets/1.jpg";
+import newss from "./assets/2.jpg";
 
 export const personalInfo = {
   name: "Thanuja Sewmini",
@@ -64,18 +67,20 @@ export const projects = [
   {
     id: 1,
     title: "CareSync - Telemedicine Platform",
-    description: "Developed a full-stack healthcare appointment system using microservices, with features like appointment booking, doctor approvals, AI services, and video consultation setup.",
-    tech: ["React", "Node.js", "Express", "MongoDB", "Docker", "Kubernetes"],
+    description: "CareSync is an AI-driven healthcare platform integrating smart appointment booking, telemedicine, and automated medical analysis in one secure ecosystem. Patients upload reports for AI insights, book specialists, and attend video consultations. Doctors manage schedules and prescriptions seamlessly. Administrators maintain full platform oversight. The entire system runs on microservices architecture, Dockerized for consistency and Kubernetes-managed for deployment.",
+    tech: ["MERN", "Tailwind CSS", "Docker", "Kubernetes"],
     category: "Full Stack",
     githubLink: "https://github.com/Waruna-dev/healthcare-microservices.git",
     liveLink: "#",
+    linkedinLink: "https://www.linkedin.com/posts/thanuja-sewmini-005901374_distributedsystems-microservices-healthcaretech-ugcPost-7467647853188812800-oV2E/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFyussUB8bGeFVJrNG5EX_fBakdwgTQpz7c",
+    linkedin: "https://www.linkedin.com/posts/thanuja-sewmini-005901374_distributedsystems-microservices-healthcaretech-ugcPost-7467647853188812800-oV2E/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFyussUB8bGeFVJrNG5EX_fBakdwgTQpz7c",
     image: carestream
   },
   {
     id: 2,
     title: "SwapNest - Item Exchange Platform",
     description: "Developed a second-hand item exchange platform with listings, item swapping, donations, notifications, authentication, and scheduling features to improve user interaction and communication.",
-    tech: ["React", "Node.js", "Express", "MongoDB","Tailwind CSS"],
+    tech: ["MERN", "Tailwind CSS"],
     category: "Full Stack",
     githubLink: "https://github.com/Waruna-dev/SwapNest.git",
     liveLink: "https://swapnest-client.onrender.com/",
@@ -85,10 +90,12 @@ export const projects = [
     id: 3,
     title: "Zee Link - URL Shortener & QR Generator ",
     description: "Developed a full-stack URL shortener that generates custom or automatic short links and includes QR code generation for easy sharing.",
-    tech: ["React", "Node.js", "Express", "MongoDB"],
+    tech: ["MERN"],
     category: "Full Stack",
     githubLink: "https://github.com/zee544/FixItNow1.git",
     liveLink: "#",
+    linkedinLink: "https://www.linkedin.com/posts/thanuja-sewmini-005901374_mern-fullstackdevelopment-webapp-activity-7422375080342573056-WqV_?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFyussUB8bGeFVJrNG5EX_fBakdwgTQpz7c",
+    linkedin:"https://www.linkedin.com/posts/thanuja-sewmini-005901374_mern-fullstackdevelopment-webapp-activity-7422375080342573056-WqV_?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFyussUB8bGeFVJrNG5EX_fBakdwgTQpz7c",
     image: url
   },
   {
@@ -99,6 +106,8 @@ export const projects = [
     category: "Full Stack",
     githubLink: "https://github.com/zee544/ShortenURL1.git",
     liveLink: "#",
+    linkedin:"https://www.linkedin.com/posts/thanuja-sewmini-005901374_itproject-mern-webdevelopment-ugcPost-7422660879999057920-BS1a/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFyussUB8bGeFVJrNG5EX_fBakdwgTQpz7c",
+    linkedinLink:"https://www.linkedin.com/posts/thanuja-sewmini-005901374_itproject-mern-webdevelopment-ugcPost-7422660879999057920-BS1a/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFyussUB8bGeFVJrNG5EX_fBakdwgTQpz7c",
     image: fixitnow
   },
   {
@@ -133,6 +142,33 @@ export const projects = [
 },
 
  
+];
+
+
+export const certifications = [
+  {
+    id: 1,
+    name: "Electronics (E2) - Certificate Course",
+    issuer: "Ceylon German Technical Training Institute",
+    date: "2024-2025 (October to March)",
+   image: germentech,
+  },
+   {
+    id: 2,
+    name: "AI/ML Engineer - Stage 1",
+    issuer: "SLIIT - Centre for Open and Distance Education",
+    date: "2024",
+   image: news,
+    verifyLink: "#"
+  },
+   {
+    id: 3,
+    name: "AI/ML Engineer - Stage 2",
+    issuer: "SLIIT - Centre for Open and Distance Education",
+    date: "2024",
+   image: newss,
+    verifyLink: "#"
+  },
 ];
 
 export const experienceTimeline = [
