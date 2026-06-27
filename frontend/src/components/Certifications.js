@@ -10,32 +10,38 @@ const Certifications = () => {
   const sectionRef = useRef(null);
   const autoPlayRef = useRef(null);
 
-  // === DEFINE FUNCTIONS FIRST ===
-  const handlePrev = () => {
+  // Define functions first
+  const handlePrev = React.useCallback(() => {
     if (isAnimating || certifications.length <= 1) return;
     setIsAnimating(true);
     setCurrentIndex((prev) => 
       prev === 0 ? certifications.length - 1 : prev - 1
     );
     setTimeout(() => setIsAnimating(false), 500);
-  };
+  }, [isAnimating]);
 
-  const handleNext = () => {
+  const handleNext = React.useCallback(() => {
     if (isAnimating || certifications.length <= 1) return;
     setIsAnimating(true);
     setCurrentIndex((prev) => 
       prev === certifications.length - 1 ? 0 : prev + 1
     );
     setTimeout(() => setIsAnimating(false), 500);
-  };
+  }, [isAnimating]);
 
-  const closeModal = () => {
+  const closeModal = React.useCallback(() => {
     setSelectedImage(null);
     setSelectedCert(null);
     document.body.style.overflow = 'auto';
-  };
+  }, []);
 
-  // === THEN USE THEM IN useEffect ===
+  const openModal = React.useCallback((cert) => {
+    setSelectedImage(cert.image);
+    setSelectedCert(cert);
+    document.body.style.overflow = 'hidden';
+  }, []);
+
+  // Auto-slide effect
   useEffect(() => {
     if (certifications.length <= 1) return;
     
@@ -66,8 +72,9 @@ const Certifications = () => {
     }
 
     return () => clearInterval(autoPlayRef.current);
-  }, [currentIndex, isAnimating, handleNext]);
+  }, [isAnimating, handleNext]);
 
+  // Keyboard events
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.key === 'Escape') {
@@ -89,12 +96,6 @@ const Certifications = () => {
     setIsAnimating(true);
     setCurrentIndex(index);
     setTimeout(() => setIsAnimating(false), 500);
-  };
-
-  const openModal = (cert) => {
-    setSelectedImage(cert.image);
-    setSelectedCert(cert);
-    document.body.style.overflow = 'hidden';
   };
 
   if (!certifications || certifications.length === 0) {
