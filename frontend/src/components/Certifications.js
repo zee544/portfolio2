@@ -10,6 +10,32 @@ const Certifications = () => {
   const sectionRef = useRef(null);
   const autoPlayRef = useRef(null);
 
+  // === DEFINE FUNCTIONS FIRST ===
+  const handlePrev = () => {
+    if (isAnimating || certifications.length <= 1) return;
+    setIsAnimating(true);
+    setCurrentIndex((prev) => 
+      prev === 0 ? certifications.length - 1 : prev - 1
+    );
+    setTimeout(() => setIsAnimating(false), 500);
+  };
+
+  const handleNext = () => {
+    if (isAnimating || certifications.length <= 1) return;
+    setIsAnimating(true);
+    setCurrentIndex((prev) => 
+      prev === certifications.length - 1 ? 0 : prev + 1
+    );
+    setTimeout(() => setIsAnimating(false), 500);
+  };
+
+  const closeModal = () => {
+    setSelectedImage(null);
+    setSelectedCert(null);
+    document.body.style.overflow = 'auto';
+  };
+
+  // === THEN USE THEM IN useEffect ===
   useEffect(() => {
     if (certifications.length <= 1) return;
     
@@ -40,7 +66,7 @@ const Certifications = () => {
     }
 
     return () => clearInterval(autoPlayRef.current);
-  }, [currentIndex, isAnimating]);
+  }, [currentIndex, isAnimating, handleNext]);
 
   useEffect(() => {
     const handleEsc = (e) => {
@@ -56,25 +82,7 @@ const Certifications = () => {
     };
     window.addEventListener('keydown', handleEsc);
     return () => window.removeEventListener('keydown', handleEsc);
-  }, [isAnimating]);
-
-  const handlePrev = () => {
-    if (isAnimating || certifications.length <= 1) return;
-    setIsAnimating(true);
-    setCurrentIndex((prev) => 
-      prev === 0 ? certifications.length - 1 : prev - 1
-    );
-    setTimeout(() => setIsAnimating(false), 500);
-  };
-
-  const handleNext = () => {
-    if (isAnimating || certifications.length <= 1) return;
-    setIsAnimating(true);
-    setCurrentIndex((prev) => 
-      prev === certifications.length - 1 ? 0 : prev + 1
-    );
-    setTimeout(() => setIsAnimating(false), 500);
-  };
+  }, [isAnimating, handlePrev, handleNext, closeModal]);
 
   const goToSlide = (index) => {
     if (isAnimating || index === currentIndex || certifications.length <= 1) return;
@@ -87,12 +95,6 @@ const Certifications = () => {
     setSelectedImage(cert.image);
     setSelectedCert(cert);
     document.body.style.overflow = 'hidden';
-  };
-
-  const closeModal = () => {
-    setSelectedImage(null);
-    setSelectedCert(null);
-    document.body.style.overflow = 'auto';
   };
 
   if (!certifications || certifications.length === 0) {
@@ -143,7 +145,7 @@ const Certifications = () => {
                     <div className="cert-image-overlay">
                       <div className="cert-overlay-content">
                         <Maximize2 size={28} />
-                      
+                        <span>View Full</span>
                       </div>
                     </div>
                   </div>
@@ -201,7 +203,6 @@ const Certifications = () => {
       )}
 
       <style>{`
-        
         .cert-section {
           padding: 6rem 2rem;
           background: var(--bg-primary, #0a0e1a);
@@ -213,11 +214,10 @@ const Certifications = () => {
           margin: 0 auto;
         }
 
-        
         .cert-title {
           font-size: 2.5rem;
           font-weight: 800;
-          color:#22d3ee;
+          color: #22d3ee;
           text-align: center;
           margin-bottom: 3rem;
           position: relative;
@@ -433,7 +433,6 @@ const Certifications = () => {
           border-radius: 4px;
         }
 
-        /* Modal */
         .cert-modal-overlay {
           position: fixed;
           inset: 0;

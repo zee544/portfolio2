@@ -72,10 +72,7 @@ const Hero = () => {
               <span>View Projects</span>
               <ArrowRight size={18} />
             </button>
-            <button onClick={() => handleScrollTo('contact')} className="btn btn-secondary">
-              <span>Contact Me</span>
-              <Mail size={16} />
-            </button>
+            
           </div>
 
           <div className="hero-socials">
