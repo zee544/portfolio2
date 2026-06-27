@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { projects } from '../data';
-import { ExternalLink, Search, X, Calendar, Tag, Code } from 'lucide-react';
+import { ExternalLink, Search, X, Calendar, Tag } from 'lucide-react'; // Removed Code
 import { GitHubIcon, LinkedInIcon } from './SocialIcons';
 
 const Projects = () => {
